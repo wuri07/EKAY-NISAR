@@ -1,0 +1,21 @@
+[project]
+name = "pythonproject2"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "asf>=0.1.6",
+    "asf-search>=14.0.0",
+    "click>=8.5.0",
+    "earthaccess>=0.19.0",
+    "folium>=0.20.0",
+    "h5py>=3.16.0",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.3",
+    "rasterio>=1.5.1",
+    "requests>=2.34.2",
+    "rio-cogeo>=7.0.2",
+    "s3fs>=2026.9.0",
+    "streamlit>=1.65.0",
+    "streamlit-folium>=0.27.4",
+    "xarray>=2026.7.0",
+]
