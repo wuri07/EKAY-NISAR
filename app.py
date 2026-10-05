@@ -18,7 +18,6 @@ st.markdown(
 # ==========================================
 st.sidebar.header("🌍 Region & Country Selector")
 
-# Dictionary mapping countries to bounding boxes [lat_min, lat_max, lon_min, lon_max]
 country_bboxes = {
     "United States": (37.5, 38.5, -121.5, -120.5),  # California Central Valley
     "Brazil": (-4.0, -3.0, -60.0, -59.0),  # Amazon Rainforest
@@ -62,7 +61,6 @@ if fetch_btn:
     else:
         st.info(f"Processing data for: {', '.join(selected_countries)}...")
 
-        # Create side-by-side columns based on the number of selected countries
         cols = st.columns(len(selected_countries))
 
         for idx, country in enumerate(selected_countries):
@@ -104,7 +102,6 @@ if fetch_btn:
                             ax.set_title("Multi-Landform Classification", fontsize=10, fontweight='bold')
                             ax.axis('off')
 
-                            # Add professional colorbar legend
                             cbar = fig.colorbar(im, ticks=[0, 1, 2, 3, 4], orientation='horizontal', pad=0.2,
                                                 shrink=0.9)
                             cbar.set_ticklabels(['No Data', 'Water', 'Soil', 'Forest', 'Urban'])
@@ -112,6 +109,7 @@ if fetch_btn:
                             st.pyplot(fig)
 
                         else:
+                            # Safely assigned tuples for rendering options
                             if "Flood" in monitoring_mode:
                                 display_mask = np.where(data == 1, 1, 0)
                                 cmap_name, title_str = 'Blues', "Flood Extent"
@@ -120,7 +118,7 @@ if fetch_btn:
                                 cmap_name, title_str = 'YlOrBr', "Bare Soil"
                             elif "Forest" in monitoring_mode:
                                 display_mask = np.where(data == 3, 1, 0)
-                                cmap_name, title_str = 'Forest Canopy'
+                                cmap_name, title_str = 'Greens', "Forest Canopy"
                             else:
                                 display_mask = np.where(data == 4, 1, 0)
                                 cmap_name, title_str = 'Reds', "Urban Structures"
@@ -131,7 +129,7 @@ if fetch_btn:
                             ax.axis('off')
                             st.pyplot(fig)
 
-                        # Display metrics
+                        # Display metrics safely
                         water_count = np.sum(data == 1)
                         total = data.size
                         pct = (water_count / total) * 100
